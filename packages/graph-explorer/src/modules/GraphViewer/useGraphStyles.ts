@@ -11,6 +11,8 @@ import {
 } from "@/core";
 
 import { useBackgroundImageMap } from "./useBackgroundImageMap";
+import { LABELS } from "@/utils";
+import DEFAULT_ICON_URL from "@/utils/defaultIconUrl";
 
 const LINE_PATTERN = {
   solid: undefined,
@@ -60,6 +62,20 @@ function createGraphStyles(
       height: 24,
     };
   }
+
+  // Add default style for missing types (e.g., blank nodes)
+  styles[`node[type="${LABELS.MISSING_TYPE}"]`] = {
+    "background-image": DEFAULT_ICON_URL,
+    "background-color": "#128EE5",
+    "background-opacity": 0.4,
+    "border-color": "#128EE5",
+    "border-width": 0,
+    "border-opacity": 0,
+    "border-style": "solid",
+    shape: "ellipse",
+    width: 24,
+    height: 24,
+  };
 
   for (const etConfig of deferredEtConfigs) {
     const et = etConfig?.type;
